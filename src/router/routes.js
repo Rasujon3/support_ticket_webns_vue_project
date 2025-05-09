@@ -1,7 +1,4 @@
 import { createRouter, createWebHistory } from 'vue-router';
-import Login from '../components/Login.vue';
-import Register from '../components/Register.vue';
-import Dashboard from '../components/Dashboard.vue';
 import TicketList from '../components/Tickets/List.vue';
 import TicketCreate from '../components/Tickets/Create.vue';
 import TicketDetail from '../components/Tickets/Detail.vue';
@@ -15,26 +12,40 @@ const routes = [
     {
         path: '/login',
         name: 'Login',
-        component: Login,
+        component: () => import('../components/Login.vue'),
         // meta: { guest: true, hideNavbar: true }
         meta: { hideNavbar: true }
     },
     {
         path: '/register',
         name: 'Register',
-        component: Register,
+        component: () => import('../components/Register.vue'),
         // meta: { guest: true, hideNavbar: true }
         meta: { hideNavbar: true }
     },
     {
         path: '/dashboard',
         name: 'Dashboard',
-        component: Dashboard,
+        component: () => import('../components/Dashboard.vue'),
         meta: { requiresAuth: true }
     },
     { path: '/tickets', component: TicketList },
     { path: '/tickets/create', component: TicketCreate },
-    { path: '/tickets/:id', component: TicketDetail, props: true }
+    { path: '/tickets/:id', component: TicketDetail, props: true },
+    {
+        path: '/tickets/:id/assign',
+        name: 'AssignTicket',
+        component: () => import('../components/Tickets/AssignForm.vue'),
+        meta: { requiresAuth: true }
+    },
+    {
+        path: '/tickets/:id/status',
+        name: 'TicketStatus',
+        component: () => import('../components/Tickets/StatusForm.vue'),
+        meta: { requiresAuth: true }
+    }
+
+
 ];
 
 const router = createRouter({
