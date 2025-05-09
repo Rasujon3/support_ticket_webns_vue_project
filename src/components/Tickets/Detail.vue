@@ -30,7 +30,7 @@
             <strong>Attachments:</strong>
             <ul class="list-unstyled">
               <li v-for="file in msg.attachments" :key="file.id">
-                <a :href="file.file_path" target="_blank">{{ file.original_name }}</a>
+                <a :href="`${baseUrl}/${file.file_path}`" target="_blank">{{ file.original_name }}</a>
               </li>
             </ul>
           </div>
@@ -63,6 +63,7 @@
   import { useRoute } from 'vue-router';
   
   const route = useRoute();
+//   const router = useRouter();
   const ticketId = route.params.id;
   
   const ticket = ref(null);
@@ -70,13 +71,21 @@
   const newMessage = ref('');
   const attachments = ref([]);
   const currentUserId = ref(null); // You can load this from your auth logic
-  
-  onMounted(async () => {
+  const baseUrl = 'http://localhost:8000'; // or use import.meta.env.VITE_API_BASE_URL if using env vars
+
+  const getData = async () => {
     const res = await axios.get(`/tickets/${ticketId}`);
-    ticket.value = res.data.data.ticket;
-    messages.value = res.data.data.messages;
-    currentUserId.value = res.data.data.auth_user_id; // set this on backend if needed
+    console.log('Ticket response:', res.data?.data?.messages[8]);
+    ticket.value = res.data?.data?.ticket;
+    messages.value = res.data?.data?.messages;
+    currentUserId.value = res.data?.data?.auth_user_id; // set this on backend if needed
+  };
+  
+  onMounted(() => {
+    getData();
   });
+//   console.log('Messages:', messages.value);
+  
   
   const handleFiles = (event) => {
     attachments.value = Array.from(event.target.files);
@@ -89,15 +98,17 @@
       formData.append(`attachments[${index}]`, file);
     });
   
-    await axios.post(`/tickets/${ticketId}/messages`, formData);
+    await axios.post(`/messages/${ticketId}`, formData);
     newMessage.value = '';
     attachments.value = [];
     await refreshMessages();
   };
   
   const refreshMessages = async () => {
-    const res = await axios.get(`/tickets/${ticketId}`);
-    messages.value = res.data.data.messages;
+    // const res = await axios.get(`/tickets/${ticketId}`);
+    // messages.value = res.data.data.messages;
+    // router.push(`/tickets/${ticket.id}`);
+    getData();
   };
   
   const capitalize = (str) => str.charAt(0).toUpperCase() + str.slice(1);
