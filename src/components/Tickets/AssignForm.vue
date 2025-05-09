@@ -46,13 +46,12 @@
   onMounted(async () => {
     try {
       const res = await axios.get(`/tickets/${route.params.id}/assign`);
-      console.log('Assign ticket response:', res.data);
       
       ticket.value = res.data?.data?.ticket;
       admins.value = res.data?.data?.admins;
       form.value.assigned_to = ticket.value.assigned_to;
     } catch (err) {
-      console.error('Failed to load ticket or admin list:', err.message);
+      alert('Failed to load ticket or admin list.');
     }
   });
   
@@ -63,7 +62,6 @@
       alert('Ticket assigned successfully');
       router.push('/tickets');
     } catch (err) {
-      console.error('Assignment failed:', err.message);
       alert('Failed to assign ticket.');
     }
   };

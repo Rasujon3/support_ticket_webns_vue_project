@@ -23,7 +23,6 @@ export default {
     actions: {
         async login({ commit }, credentials) {
             const res = await api.post('/login', credentials);
-            // console.log(res.data);
 
             commit('setToken', res.data.token);
             // await api.get('/user').then(r => commit('setUser', r.data));

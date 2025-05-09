@@ -75,7 +75,6 @@
 
   const getData = async () => {
     const res = await axios.get(`/tickets/${ticketId}`);
-    console.log('Ticket response:', res.data?.data?.messages[8]);
     ticket.value = res.data?.data?.ticket;
     messages.value = res.data?.data?.messages;
     currentUserId.value = res.data?.data?.auth_user_id; // set this on backend if needed
@@ -84,8 +83,6 @@
   onMounted(() => {
     getData();
   });
-//   console.log('Messages:', messages.value);
-  
   
   const handleFiles = (event) => {
     attachments.value = Array.from(event.target.files);

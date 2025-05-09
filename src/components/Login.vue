@@ -26,8 +26,7 @@
         email: email.value,
         password: password.value,
       });
-      console.log('Login response:', response.data);
-      console.log('Login response.token:', response.data.data.token);
+      
       if (!response.data?.data?.token) {
         errors.value = 'Login failed';
       }

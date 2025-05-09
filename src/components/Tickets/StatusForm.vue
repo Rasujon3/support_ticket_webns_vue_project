@@ -39,7 +39,7 @@
       ticket.value = res.data.data.ticket;
       form.value.status = ticket.value.status;
     } catch (err) {
-      console.error('Failed to fetch ticket status:', err);
+      alert('Failed to load ticket status.');
     }
   });
   
@@ -50,7 +50,6 @@
       alert('Ticket status updated successfully');
       router.push('/tickets');
     } catch (err) {
-      console.error('Failed to update status:', err);
       alert('Status update failed.');
     }
   };

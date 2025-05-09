@@ -62,13 +62,11 @@
   const fetchTickets = async () => {
     try {
       const res = await axios.get('/tickets');
-      console.log('Tickets response:', res.data);
       
       tickets.value = res.data?.data?.data?.data || [];
       isAdmin.value = res.data?.meta?.is_admin || false;
       authUserId.value = res.data?.meta?.auth_user_id || null;
     } catch (error) {
-      console.error(error);
       if (error.response?.status === 401) router.push('/login');
     }
   };
