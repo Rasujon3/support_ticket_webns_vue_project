@@ -5,14 +5,19 @@
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "lint": "vue-cli-service lint",
+    "dev": "vite",
+    "preview": "vite preview"
   },
   "dependencies": {
     "@popperjs/core": "^2.11.8",
+    "@vitejs/plugin-vue": "^5.2.4",
     "axios": "^1.9.0",
     "bootstrap": "^5.3.6",
     "core-js": "^3.8.3",
-    "vue": "^3.2.13",
+    "laravel-echo": "^2.1.0",
+    "pusher-js": "^8.4.0",
+    "vue": "^3.5.13",
     "vue-router": "^4.5.1",
     "vuex": "^4.1.0"
   },
@@ -23,7 +28,8 @@
     "@vue/cli-plugin-eslint": "~5.0.0",
     "@vue/cli-service": "~5.0.0",
     "eslint": "^7.32.0",
-    "eslint-plugin-vue": "^8.0.3"
+    "eslint-plugin-vue": "^8.0.3",
+    "vite": "^6.3.5"
   },
   "eslintConfig": {
     "root": true,

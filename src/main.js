@@ -1,3 +1,4 @@
+// import './resources/js/bootstrap'; // 👈 Make sure this is at the top
 import { createApp } from 'vue';
 import App from './App.vue';
 import router from './router/routes'; // your router file
