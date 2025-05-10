@@ -79,9 +79,20 @@
     messages.value = res.data?.data?.messages;
     currentUserId.value = res.data?.data?.auth_user_id; // set this on backend if needed
   };
+
+  // eslint-disable-next-line no-unused-vars
+  // const listener = () => {
+  //   window.Echo.private(`chat.${ticketId}`)
+  //     .listen('NewMessageSent', (e) => {
+  //       console.log('New message received:', e);
+        
+  //       messages.value.push(e); // append new message
+  //     });
+  // };
   
   onMounted(() => {
     getData();
+    // listener();
   });
   
   const handleFiles = (event) => {
@@ -95,16 +106,18 @@
       formData.append(`attachments[${index}]`, file);
     });
   
-    await axios.post(`/messages/${ticketId}`, formData);
-    newMessage.value = '';
-    attachments.value = [];
-    await refreshMessages();
+    try {
+      await axios.post(`/messages/${ticketId}`, formData);
+      newMessage.value = '';
+      attachments.value = [];
+      await refreshMessages();
+    } catch (error) {
+      console.error('Error sending message:', error.message);
+      alert('Failed to send message. Please try again.',error.message);
+    }
   };
   
   const refreshMessages = async () => {
-    // const res = await axios.get(`/tickets/${ticketId}`);
-    // messages.value = res.data.data.messages;
-    // router.push(`/tickets/${ticket.id}`);
     getData();
   };
   

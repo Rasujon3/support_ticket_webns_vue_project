@@ -1,13 +1,18 @@
 <!-- eslint-disable vue/multi-word-component-names -->
 <template>
-    <div class="container mt-5">
+  <div class="card w-50 mx-auto my-5">
+    <div class="container my-5">
       <h2>Login</h2>
       <form @submit.prevent="submit">
         <input v-model="email" type="email" placeholder="Email" class="form-control mb-2" />
         <input v-model="password" type="password" placeholder="Password" class="form-control mb-2" />
         <button class="btn btn-primary">Login</button>
       </form>
+      <div class="mt-2">
+        <p>Don't have an account? <router-link to="/register">Register</router-link></p>
+      </div>
     </div>
+  </div>
   </template>
   
   <script setup>
